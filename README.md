@@ -23,7 +23,8 @@ Seu desafio é elaborar um sistema em Java capaz de:
 ![image](https://github.com/im2back/uol-challenger/assets/117541466/d251cd4c-c05e-427d-82fb-2471502cf642)
 
 ## Documentação
-Em breve
+![image](https://github.com/im2back/uol-challenger/assets/117541466/871e34bb-23b5-4250-bcb7-4aae7d2dcb31)
+
 
 ## Modelo conceitual
 em breve
