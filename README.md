@@ -26,8 +26,28 @@ Seu desafio é elaborar um sistema em Java capaz de:
 ![image](https://github.com/im2back/uol-challenger/assets/117541466/871e34bb-23b5-4250-bcb7-4aae7d2dcb31)
 
 
-## Modelo conceitual
-em breve
+# Prints do meu projeto 
+## Tela de cadastro:
+
+![image](https://github.com/im2back/uol-challenger/assets/117541466/371d7677-040c-4a72-91bd-6c4e2e67f9fc)
+
+
+## Tela de feedback pós cadastro: 
+
+![image](https://github.com/im2back/uol-challenger/assets/117541466/5f611cb8-be19-4605-b89a-b70a5f5584c9)
+
+## Tela listar jogadores:
+
+![image](https://github.com/im2back/uol-challenger/assets/117541466/50a354c4-eec9-4669-b550-e2228f50151f)
+
+## Tela Editar jogador :
+
+![image](https://github.com/im2back/uol-challenger/assets/117541466/493d1664-8c2c-4bfe-a31c-c68fa99ad7a5)
+
+
+
+
+
 
 # Tecnologias utilizadas
 ## Back end
