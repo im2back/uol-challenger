@@ -22,16 +22,41 @@ public class PlayerService {
 	public List<Player> findAll() {
 		return repository.findAll();
 	}
+	
+	public void deleteUser(Long id) {
+		Player user = findById(id);
+		codinomeService.deleteCodinome(user.getCodinome());
+		repository.deleteById(id);
+		
+	}
+	
+	public  Player editarJogador(Long id) {
+		Player player = findById(id);
+		return player;
+	}
+	
+	public Player findById(Long id) {
+		return repository.findById(id).get();
+	}
+	
+	public void updatePlayer(PlayerRequestDTO playerDTO, Long id) {
+		Player player = findById(id);
+		player.setName(playerDTO.name());
+		player.setEmail(playerDTO.email());
+		player.setTelefone(playerDTO.telefone());
+		
+		repository.save(player);
+	}
 
-	public PlayerResponseDTO insertNewPlayerAvenger(PlayerRequestDTO playerDTO, String grupo) {
+	public PlayerResponseDTO insertNewPlayerAvenger(PlayerRequestDTO playerDTO) {
 
-		if (grupo.equals("Vingadores") == false && grupo.equals("Liga da Justiça") == false) {
+		if (playerDTO.grupo().equals("Vingadores") == false && playerDTO.grupo().equals("Liga da Justiça") == false) {
 			throw new ServiceExeptions("Selecione um Grupo Válido : Liga da Justiça ou Vingadores.");
 		}
 
-		String codinomeLivre = codinomeService.sortearCodinome(grupo);
+		String codinomeLivre = codinomeService.sortearCodinome(playerDTO.grupo());
 
-		Player player = new Player(playerDTO, codinomeLivre, grupo);
+		Player player = new Player(playerDTO, codinomeLivre, playerDTO.grupo());
 		repository.save(player);
 
 		codinomeService.saveCodinome(player.getCodinome());

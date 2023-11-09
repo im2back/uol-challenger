@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://thymeleaf.org"
+			   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+			   layout:decorate="~{template.html}">
+<head>
+    <title>Alterar jogador</title>
+      <link rel="stylesheet" type="text/css" href="/css/styleAlterar.css">
+</head>
+
+<body>
+	<div layout:fragment="conteudo">
+		<h1>Alterar jogador</h1>
+		
+		<form th:action="@{'/player/editar?idParam=' + ${usuario.id}}" method="post">
+			
+			<label for ="name">Nome: </label>
+		    <input type="text" id="name" name ="name" th:field=${usuario.name}> 
+		<br>
+		<br>
+		<label for ="email">E-mail:</label>
+		<input id="email" type="text" name ="email" th:value=${usuario.email}> 
+		<br>
+		<br>
+		<label for ="telefone">Telefone:</label>
+		<input id="telefone" type="text" name ="telefone" th:value=${usuario.telefone}>
+		 <br>
+		  <br>
+		 <label for ="liga">Liga da Justiça</label>
+		 <input type="checkbox" id="liga" value="Liga da Justiça" name="grupo" th:checked="${usuario.grupo == 'Liga da Justiça'}">
+		 <br>
+		  <label for ="vinga">Vingadores</label>
+		 <input type="checkbox" id="vinga" value="Vingadores" name="grupo" th:checked="${usuario.grupo == 'Vingadores'}">
+		 <br>
+		 <br>
+		 <br>
+		 <input type="submit" value="Alterar">
+		 
+		</form>
+
+	</div>
+	</body>
+</html>

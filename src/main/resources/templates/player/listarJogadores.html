@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://thymeleaf.org"
+			   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+			   layout:decorate="~{template.html}">
+<head>
+    <title>Listar jogadores</title>
+        <link rel="stylesheet" type="text/css" href="/css/styleListar.css">
+</head>
+
+<body>
+<div layout:fragment="conteudo">	
+	<h1>Listar jogadores</h1>
+	<a th:href="@{'/player/formulario'}">Go Home</a>
+	 <table>
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>E-mail</th>
+				<th>Telefone</th>
+				<th>Codinome</th>
+				<th>Grupo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="usuario : ${lista}">
+				<td th:text="${usuario.name}"> </td> 
+				<td th:text="${usuario.email}" > </td>
+				<td th:text="${usuario.telefone}" > </td>
+				<td th:text="${usuario.codinome}"> </td>
+				<td th:text="${usuario.grupo}"> </td>
+				
+				<td>            
+					 <a th:href="@{'/player/editar' + '?idParam=' + ${usuario.id}}">Editar</a>		
+	            </td>
+	            
+	            <td>
+					<form th:action="@{'/player/excluir' + '?idParam=' + ${usuario.id}}" method="post">
+					    <input type="hidden" name="_method" value="DELETE" />
+					    <button type="submit">Excluir</button>
+					</form>
+	            </td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+	</body>
+</html>

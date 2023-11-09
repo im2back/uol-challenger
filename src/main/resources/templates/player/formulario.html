@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://thymeleaf.org"
+			   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+			   layout:decorate="~{template.html}">
+<head>
+    <title>Cadastro de Usuario</title>
+     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+
+<body>
+	<div layout:fragment="conteudo">	
+		<h1>Cadastro de Player</h1>
+	
+		<form action="/player" method="post">
+			<label for ="name">Nome: </label>
+			<input type="text" id="name" name ="name"> 
+				<br>
+				<br>
+			<label for ="email">E-mail:</label>
+			<input id="email" type="text" name ="email"> 
+				<br>
+				<br>
+			<label for ="telefone">Telefone:</label>
+			<input id="telefone" type="text" name ="telefone">
+			    <br>
+			    <br>
+			<label for ="liga">Liga da Justiça</label>
+			<input type="checkbox" id="liga" value="Liga da Justiça" name="grupo">
+			 	<br>
+			<label for ="vinga">Vingadores</label>
+			<input type="checkbox" id="vinga" value="Vingadores" name="grupo">
+				 <br>
+				 <br>
+				 <br>
+			<input type="submit" value="Cadastrar">
+		</form>
+			<form action="http://localhost:8080/player/listar">
+				<input type="submit" value="Listar jogadores">
+			</form>
+	</div>
+	
+
+</body>
+
+
+</html>

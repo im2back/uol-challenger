@@ -28,6 +28,12 @@ public class CodinomesInUseService {
 		repository.save(codinome);
 	}
 	
+	public void deleteCodinome(String name) {
+		var codinome = repository.findByCodinome(name);
+		repository.deleteById(codinome.getId());
+		
+	}
+	
 	public List<String> findall(){
 		List<CodinomesInUse> list = repository.findAll();
 		List<String> codinomesInUseList = new ArrayList<>();

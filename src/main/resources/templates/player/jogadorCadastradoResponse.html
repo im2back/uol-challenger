@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://thymeleaf.org"
+			   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+			   layout:decorate="~{template.html}">
+<head>
+    <title>Cadastro Realizado ! </title>
+    <link rel="stylesheet" type="text/css" href="/css/styleUserCreated.css">
+</head>
+
+<body>
+	<div layout:fragment="conteudo">
+		<h1>Jogador cadastrado :</h1>
+		<br>
+		<a th:href="@{'/player/formulario'}">Go Home</a>
+		<br>
+		<br>
+		<table>
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>E-mail</th>
+					<th>Telefone</th>
+					<th>Codinome</th>
+					<th>Grupo</th>
+				</tr>
+			 </thead>
+			<tbody>
+				<tr th:each="usuario : ${lista}">
+					<td th:text="${usuario.name}" > </td>
+					<td th:text="${usuario.email}" > </td>
+					<td th:text="${usuario.telefone}" > </td>
+					<td th:text="${usuario.codinome}"> </td>
+					<td th:text="${usuario.grupo}"> </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	
+</body>
+</html>
