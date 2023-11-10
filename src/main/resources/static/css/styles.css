@@ -55,6 +55,13 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+[id="textgroup"]{
+	font-size: 25px;
+	 
+    color: rgb(0, 0, 255);
+}
+
+
 /* Estilos para o botão "Listar jogadores" */
 form[action="http://localhost:8080/player/listar"] input[type="submit"] {
     background-color: #28a745;

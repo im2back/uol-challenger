@@ -3,15 +3,26 @@
 			   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 			   layout:decorate="~{template.html}">
 <head>
-    <title>Cadastro de Usuario</title>
+    <title>Cadastro</title>
      <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 
+
+
+
 <body>
-	<div layout:fragment="conteudo">	
-		<h1>Cadastro de Player</h1>
-	
-		<form action="/player" method="post">
+
+	<div layout:fragment="conteudo">
+			
+		<h1>Cadastro do jogador UOL</h1>
+		
+		<div th:if="${errorMessages != null and errorMessages.size() > 0}">
+		    <div th:each="message : ${errorMessages}" class="error-message">
+		        <p th:text="${message}"></p>
+		    </div>
+		</div>
+
+		<form action="/player/formulario" method="post">
 			<label for ="name">Nome: </label>
 			<input type="text" id="name" name ="name"> 
 				<br>
@@ -24,6 +35,7 @@
 			<input id="telefone" type="text" name ="telefone">
 			    <br>
 			    <br>
+			    <p id="textgroup">Quero ser do grupo :</p>
 			<label for ="liga">Liga da Justiça</label>
 			<input type="checkbox" id="liga" value="Liga da Justiça" name="grupo">
 			 	<br>

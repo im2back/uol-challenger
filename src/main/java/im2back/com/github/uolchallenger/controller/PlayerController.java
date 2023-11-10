@@ -24,34 +24,34 @@ public class PlayerController {
 	@GetMapping("/editar")
 	public String editarUsuario(@RequestParam String idParam, Model model){
 		Long id = Long.parseLong(idParam);
-		var player = service.editarJogador(id);
-		System.out.println(player.getName());
-		model.addAttribute("usuario",player);
-		
-		return "player/alterarJogador";	
+			var player = service.editarJogador(id);
+				model.addAttribute("usuario",player);
+					return "player/alterarJogador";	
 	}
 	
 	@GetMapping("/formulario")
-	public String paginaDecadastroFormulario(){
-		return "player/formulario";	
+	public String paginaDecadastroFormulario(Model model){
+		var x =model.getAttribute("errorMessages");
+			model.addAttribute("errorMessages", x);	
+				return "player/formulario";	
 	}
 		
-	@PostMapping
+
+	@PostMapping("/formulario")
 	@Transactional
 	public String insertNewUser(@Valid PlayerRequestDTO playerDTO, Model model){	
 		
 		var response =	service.insertNewPlayerAvenger(playerDTO);
-		
-		model.addAttribute("lista",response);
-		return "player/jogadorCadastradoResponse";
-	}
+			model.addAttribute("lista",response);
+				return "player/jogadorCadastradoResponse";
+		}
 	
+
 	@GetMapping("/listar")
 	public String findAllUsers(Model model){
 		var response = service.findAll();
-		
-		model.addAttribute("lista",response);
-		return "player/listarJogadores";
+			model.addAttribute("lista",response);
+				return "player/listarJogadores";
 	}
 	
 	@PostMapping("/editar")
