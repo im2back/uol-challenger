@@ -1,5 +1,6 @@
 # uol-challenger
-
+# Projeto - parcialmente finalizado(VIDEO DEMONSTRATIVO NO MEU LINKEDIN)
+https://www.linkedin.com/posts/jefferson-richards-sena-de-souza-4110a3222_compassuol-java-springboot-activity-7128847756936306689-wMbx?utm_source=share&utm_medium=member_desktop
 # Sistema de cadastro de jogadores do UOL
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/im2back/Voll.med/blob/main/LICENSE) 
 
