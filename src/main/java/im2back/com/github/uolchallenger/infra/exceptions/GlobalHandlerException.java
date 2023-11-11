@@ -6,11 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,9 +22,9 @@ public class GlobalHandlerException {
 
 	@Autowired
 	private MessageSource messageSource;
-	
-	 @ExceptionHandler(ServiceExeptions.class)
-	public String handleValidacaoException(ServiceExeptions ex, HttpServletRequest request,RedirectAttributes redirectAttributes) {
+	@ResponseStatus(HttpStatus.FOUND)
+	@ExceptionHandler(ServiceExeptions.class)
+	public String handleServiceExeptions(ServiceExeptions ex, HttpServletRequest request,RedirectAttributes redirectAttributes) {
 	
 		 List<String> list = new ArrayList<>();
 		 	list.add(ex.getMessage());
@@ -32,7 +34,8 @@ public class GlobalHandlerException {
 	 
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public String handleValidacaoException(MethodArgumentNotValidException ex,HttpServletRequest request, BindingResult bindingResult
+	@ResponseStatus(HttpStatus.FOUND)
+	public String handleMethodArgumentNotValidException(MethodArgumentNotValidException ex,HttpServletRequest request, BindingResult bindingResult
 			,RedirectAttributes redirectAttributes) {
 			
 		var x = criarListaDeErros(bindingResult);
