@@ -17,22 +17,27 @@ import org.xml.sax.InputSource;
 @Service
 public class XmlService {
 	 private final String apiUrl = "https://raw.githubusercontent.com/uolhost/test-backEnd-Java/master/referencias/liga_da_justica.xml";
-
+	 
 	    private final RestTemplate restTemplate;
-
 	    
 	    public XmlService(RestTemplate restTemplate) {
 	        this.restTemplate = restTemplate;
 	    }
 
+	    
 	    public List<String> getCodinomesDaLigaDaJustica() {
 	    	var xml = restTemplate.getForObject(apiUrl, String.class);
+	    	
+	  
+	    	
 	    	List<String> codinomes = parseXmlToList(xml);
 	    	return codinomes;
 	    }
 	    
 	    public static List<String> parseXmlToList(String xml) {
+	    	
 	        List<String> codinomes = new ArrayList<>();
+	        
 	        try {
 	            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	            DocumentBuilder builder = factory.newDocumentBuilder();
