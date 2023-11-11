@@ -24,7 +24,7 @@ public class PlayerController {
 	@GetMapping("/editar")
 	public String editarUsuario(@RequestParam String idParam, Model model){
 		Long id = Long.parseLong(idParam);
-			var player = service.editarJogador(id);
+			var player = service.findById(id);
 				model.addAttribute("usuario",player);
 					return "player/alterarJogador";	
 	}

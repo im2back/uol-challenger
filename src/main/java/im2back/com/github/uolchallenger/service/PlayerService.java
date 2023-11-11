@@ -30,10 +30,6 @@ public class PlayerService {
 		
 	}
 	
-	public  Player editarJogador(Long id) {
-		Player player = findById(id);
-		return player;
-	}
 	
 	public Player findById(Long id) {
 		return repository.findById(id).get();
