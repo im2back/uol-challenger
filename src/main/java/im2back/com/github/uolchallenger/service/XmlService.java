@@ -27,12 +27,10 @@ public class XmlService {
 	    
 	    public List<String> getCodinomesDaLigaDaJustica() {
 	    	var xml = restTemplate.getForObject(apiUrl, String.class);
-	    	
-	  
-	    	
-	    	List<String> codinomes = parseXmlToList(xml);
-	    	return codinomes;
+	    		List<String> codinomes = parseXmlToList(xml);
+	    			return codinomes;
 	    }
+	    
 	    
 	    public static List<String> parseXmlToList(String xml) {
 	    	

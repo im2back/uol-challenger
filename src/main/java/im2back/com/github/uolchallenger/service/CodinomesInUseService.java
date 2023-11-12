@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import im2back.com.github.uolchallenger.infra.exceptions.ServiceExeptions;
 import im2back.com.github.uolchallenger.model.codinomes.CodinomesInUse;
+import im2back.com.github.uolchallenger.model.codinomes.validacoes.ValidadorCodinome;
 import im2back.com.github.uolchallenger.repositories.CodinomesInUseRepository;
 
 @Service
@@ -22,6 +23,9 @@ public class CodinomesInUseService {
 	
 	@Autowired
 	private JsonService jsonservice;
+	
+	@Autowired
+	private List<ValidadorCodinome> validadoresCodinome;
 	
 	public void saveCodinome(String codinomeParam) {
 		CodinomesInUse codinome = new CodinomesInUse(codinomeParam);
@@ -47,25 +51,28 @@ public class CodinomesInUseService {
 	
 	public String sortearCodinome(String grupo) {
 		
+		List<String> listaContendoTodosOsCodinomes = pegarListaSelecionada(grupo);		
+		List<String> listaContendoOsCodinomesEmUso = findall();	
+		
+		listaContendoTodosOsCodinomes.removeAll(listaContendoOsCodinomesEmUso);
+		
+		validadoresCodinome.forEach(v -> v.validar(listaContendoOsCodinomesEmUso,listaContendoTodosOsCodinomes));
+	
+		Random random = new Random();
+		int indiceSorteado = random.nextInt(listaContendoTodosOsCodinomes.size());
+			return listaContendoTodosOsCodinomes.get(indiceSorteado);
+	}
+	
+	public List<String> pegarListaSelecionada(String grupo){
+		
 		List<String> listaCodinomes = new ArrayList<>();
 		  if(grupo.equals("Vingadores")){
 			listaCodinomes = jsonservice.fetchJsonData();
 		} if(grupo.equals("Liga da Justiça")) {
 			listaCodinomes = xmlservice.getCodinomesDaLigaDaJustica();
 		}
-					
-		List<String> listaCodinomesEmUso = findall();
-		
-		listaCodinomes.removeAll(listaCodinomesEmUso);
-
-		if (listaCodinomes.isEmpty()) {
-			throw new ServiceExeptions("Não existem mais codinomes disponiveis, por favor selecione outro grupo");
-		}
-		
-		Random random = new Random();
-		int indiceSorteado = random.nextInt(listaCodinomes.size());
-		return listaCodinomes.get(indiceSorteado);
+			
+		return listaCodinomes;
 	}
-	
 	
 }
