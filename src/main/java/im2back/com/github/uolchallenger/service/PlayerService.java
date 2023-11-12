@@ -5,16 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import im2back.com.github.uolchallenger.infra.exceptions.ServiceExeptions;
 import im2back.com.github.uolchallenger.model.player.Player;
 import im2back.com.github.uolchallenger.model.player.PlayerRequestDTO;
 import im2back.com.github.uolchallenger.model.player.PlayerResponseDTO;
+import im2back.com.github.uolchallenger.model.player.validacoes.ValidadorCadastroPlayer;
 import im2back.com.github.uolchallenger.repositories.PlayerRepository;
 
 @Service
 public class PlayerService {
 	@Autowired
 	private PlayerRepository repository;
+	
+	@Autowired
+	private List<ValidadorCadastroPlayer> validadoresCadastro;
 
 	@Autowired
 	private CodinomesInUseService codinomeService;
@@ -45,13 +48,9 @@ public class PlayerService {
 	}
 
 	public PlayerResponseDTO insertNewPlayerAvenger(PlayerRequestDTO playerDTO) {
-
-		if (playerDTO.grupo().equals("Vingadores") == false && playerDTO.grupo().equals("Liga da Justiça") == false) {
-			throw new ServiceExeptions("Selecione um Grupo Válido : Liga da Justiça ou Vingadores.");
-		}
-
+		validadoresCadastro.forEach(v -> v.validar(playerDTO));
+		
 		String codinomeLivre = codinomeService.sortearCodinome(playerDTO.grupo());
-
 		Player player = new Player(playerDTO, codinomeLivre, playerDTO.grupo());
 		repository.save(player);
 
@@ -59,7 +58,7 @@ public class PlayerService {
 
 		var response = new PlayerResponseDTO(player);
 		return response;
-
 	}
+	
 
 }
