@@ -7,7 +7,6 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import im2back.com.github.uolchallenger.infra.exceptions.ServiceExeptions;
 import im2back.com.github.uolchallenger.model.codinomes.CodinomesInUse;
 import im2back.com.github.uolchallenger.model.codinomes.validacoes.ValidadorCodinome;
 import im2back.com.github.uolchallenger.repositories.CodinomesInUseRepository;
@@ -38,7 +37,7 @@ public class CodinomesInUseService {
 		
 	}
 	
-	public List<String> findall(){
+	public List<String> findAllCodinamesInUse(){
 		List<CodinomesInUse> list = repository.findAll();
 		List<String> codinomesInUseList = new ArrayList<>();
 		
@@ -51,16 +50,16 @@ public class CodinomesInUseService {
 	
 	public String sortearCodinome(String grupo) {
 		
-		List<String> listaContendoTodosOsCodinomes = pegarListaSelecionada(grupo);		
-		List<String> listaContendoOsCodinomesEmUso = findall();	
+		List<String> listaCodinomesDisponiveis = pegarListaSelecionada(grupo);		
+		List<String> listaCodinomesEmUso = findAllCodinamesInUse();	
 		
-		listaContendoTodosOsCodinomes.removeAll(listaContendoOsCodinomesEmUso);
+		listaCodinomesDisponiveis.removeAll(listaCodinomesEmUso);
 		
-		validadoresCodinome.forEach(v -> v.validar(listaContendoOsCodinomesEmUso,listaContendoTodosOsCodinomes));
+		validadoresCodinome.forEach(v -> v.validar(listaCodinomesEmUso,listaCodinomesDisponiveis));
 	
 		Random random = new Random();
-		int indiceSorteado = random.nextInt(listaContendoTodosOsCodinomes.size());
-			return listaContendoTodosOsCodinomes.get(indiceSorteado);
+		int indiceSorteado = random.nextInt(listaCodinomesDisponiveis.size());
+			return listaCodinomesDisponiveis.get(indiceSorteado);
 	}
 	
 	public List<String> pegarListaSelecionada(String grupo){
@@ -71,7 +70,6 @@ public class CodinomesInUseService {
 		} if(grupo.equals("Liga da Justiça")) {
 			listaCodinomes = xmlservice.getCodinomesDaLigaDaJustica();
 		}
-			
 		return listaCodinomes;
 	}
 	

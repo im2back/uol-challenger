@@ -49,15 +49,15 @@ public class PlayerService {
 
 	public PlayerResponseDTO insertNewPlayerAvenger(PlayerRequestDTO playerDTO) {
 		validadoresCadastro.forEach(v -> v.validar(playerDTO));
-		
+
 		String codinomeLivre = codinomeService.sortearCodinome(playerDTO.grupo());
 		Player player = new Player(playerDTO, codinomeLivre, playerDTO.grupo());
 		repository.save(player);
 
 		codinomeService.saveCodinome(player.getCodinome());
 
-		var response = new PlayerResponseDTO(player);
-		return response;
+		PlayerResponseDTO responseDTO = new PlayerResponseDTO(player);
+			return responseDTO;
 	}
 	
 
